@@ -14,7 +14,7 @@ public class LeftRotation {
 	
 	//BEST SOLUTION - BETTER COMPLEXITY
 	static int[] doLeftRotation2(int[] arr, int d){
-		List<Integer> helperList = Arrays.stream(arr).boxed().collect(Collectors.toList());;
+		List<Integer> helperList = Arrays.stream(arr).boxed().collect(Collectors.toList());
 
 		for(int rot = 1; rot <= d; rot++){
 			int aux = helperList.get(0);
