@@ -6,6 +6,66 @@ import java.util.LinkedList;
 public class Spiral2D {
 
 	public static void main(String[] args) {
+		System.out.println("Hugo Way");
+		hugoWay();
+		
+		
+		System.out.println("\nFacebook Way");
+		facebookWay();
+	}
+	
+	static void facebookWay() {
+		int size = 3;
+		int[][] matrix = doSpiralF(size);
+		
+		for(int i = 0; i < matrix.length; i++) {
+			for(int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j]+ "  ");
+			}
+			System.out.println("");
+		}
+	}
+	
+	static int[][] doSpiralF(int n) {
+		int[][] matrix = new int[n][n];
+		int size = n;
+		int count = 0;
+		int val = 0;
+		while(count < size) {
+			//0,0 --> 0,N	
+			for(int i = count; i < (size-1); i++) {
+				matrix[count][i] = ++val;
+			}
+			
+			//0,N --> N,N
+			for(int i = count; i < (size-1); i++) {
+				matrix[i][size-1] = ++val;
+			}
+			
+			//N,N --> N,O
+			for(int i = (size-1); i > count; i--) {
+				matrix[size-1][i] = ++val;
+			}
+			
+			//N,0 --> 0,0
+			for(int i = (size-1); i > count; i--) {
+				matrix[i][count] = ++val;
+			}
+			
+			size--;
+			count++;
+		}
+		
+		
+		if(n % 2 != 0) {
+			matrix[count -1 ][count -1] = ++val;
+		}
+		
+		return matrix;
+	}
+	
+	
+	static void hugoWay() {
 		int size = 3;
 		int[][] matrix = new int[size][size];
 		int aux = 1;
@@ -62,6 +122,7 @@ public class Spiral2D {
 			size--;
 			count++;
 		}
+		
 		
 		if(matrix.length % 2 != 0 && !numbers.isEmpty()) {
 			matrix[count -1 ][count -1] = numbers.poll();
