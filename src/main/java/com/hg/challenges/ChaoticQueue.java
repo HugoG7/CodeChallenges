@@ -11,26 +11,25 @@ public class ChaoticQueue {
 		minimumBribes(queue3);
 	}
 	
+	
 	static void minimumBribes(int[] queue){
 		int maxBribesPerPerson = 2;
 		int totalBribes = 0;
 		
-		for(int pos = 1; pos <= queue.length; pos++){
-			int person = queue[pos-1];
-			int diff = person - pos;
+		for(int pos = 0; pos < queue.length; pos++){
+			System.out.println("PERSON => " + queue[pos]);
+			int person = queue[pos];
+			int diff = person - (pos+1);
 
 			if(diff > maxBribesPerPerson){
-				System.out.println("Too chaotic!");
+				System.out.println("Too chaotic");
 				return;
 			}
 			
-			
-			if(diff < 0 && pos < queue.length  && person > queue[pos]){
-				diff = Math.abs(diff);
-			}
-			
-			if(diff > 0){
-				totalBribes += diff;
+			for (int j = Math.max(0, queue[pos]-2); j < pos; j++) {
+				System.out.println(queue[j]+ " > " + queue[pos]);
+				if (queue[j] > queue[pos])
+	            	totalBribes++;
 			}
 		}
 		
