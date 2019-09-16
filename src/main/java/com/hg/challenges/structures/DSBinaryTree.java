@@ -38,14 +38,14 @@ public class DSBinaryTree {
 			results.add((sum / counter));
 		}
 	}
+}
+
+class Tree<T> {
+	T value;
+	Tree<T> left, right;
 	
-	static class Tree<T> {
-		T value;
-		Tree<T> left, right;
-		
-		public Tree(T value){
-			this.value = value;
-		}
+	public Tree(T value){
+		this.value = value;
 	}
 }
 
