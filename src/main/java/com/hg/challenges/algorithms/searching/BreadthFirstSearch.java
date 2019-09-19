@@ -38,25 +38,23 @@ public class BreadthFirstSearch {
 		queue.add(gate);
 		visited[gate.x][gate.y] = true;
 		
-		int level = 1;
 		while(queue.size() != 0){
 			Node head = queue.poll();
-			
-			List<Node> neighbors = getNeighbors(matrix, head);
+ 			List<Node> neighbors = getNeighbors(matrix, head);
+ 			
 			for(int i = 0; i < neighbors.size(); i++){
-				//Find neighboors
 				int x = neighbors.get(i).x;
 				int y = neighbors.get(i).y;
+				
 				if(!visited[x][y]){
 					if(matrix[x][y] == 0){
-						matrix[x][y] = level;
+						int parentVal = matrix[head.x][head.y];
+						matrix[x][y] = parentVal == -2 ? 1 : parentVal + 1 ;
 					}
 					visited[x][y] = true;
 					queue.add(neighbors.get(i));
 				}
-			}
-			
-			level++;
+			}			
 		}
 	}
 	
@@ -85,7 +83,5 @@ public class BreadthFirstSearch {
 	
 	static boolean isAValidPath(int[][] matrix, int x, int y){
 		return !(x < 0 || x >= matrix.length || y < 0  || y >= matrix[0].length) && matrix[x][y] != -1;
-	}
-	
-	
+	}	
 }
