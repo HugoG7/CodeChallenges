@@ -20,9 +20,21 @@ public class BreadthFirstSearch {
 
 	public static void main(String[] args){
 		int[][] matrix = {{0,0,0,-1,-2},
-						  {0,-2,0,0,0}};
+						  {-2,0,0,0,0}};
 		
-		BFS(matrix, new Node(0, 4));
+		Node startGate = null;
+		for(int i = 0; i < matrix.length; i++){
+			for(int j = 0; j < matrix[i].length; j++){
+				if(matrix[i][j] == -2){
+					startGate = new Node(i, j);
+					break;
+				}
+			}
+			if(startGate != null)
+				break;
+		}
+		
+		BFS(matrix, startGate);
 		
 		for(int i = 0; i < matrix.length; i++){
 			for(int j = 0; j < matrix[i].length; j++){
