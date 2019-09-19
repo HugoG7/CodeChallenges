@@ -19,10 +19,10 @@ public class BreadthFirstSearch {
 	}
 
 	public static void main(String[] args){
-		int[][] matrix = {{0,0,-1,-2},
-						  {-2,0,0,0}};
+		int[][] matrix = {{0,0,0,-1,-2},
+						  {0,-2,0,0,0}};
 		
-		BFS(matrix, new Node(0, 3));
+		BFS(matrix, new Node(0, 4));
 		
 		for(int i = 0; i < matrix.length; i++){
 			for(int j = 0; j < matrix[i].length; j++){
@@ -39,19 +39,30 @@ public class BreadthFirstSearch {
 		visited[gate.x][gate.y] = true;
 		
 		while(queue.size() != 0){
+			boolean isGate = false;
 			Node head = queue.poll();
  			List<Node> neighbors = getNeighbors(matrix, head);
  			
+ 			if(matrix[head.x][head.y] == -2){
+ 				isGate = true;
+ 			}
+ 			
+ 			int away = isGate ? 1 : matrix[head.x][head.y] + 1;
 			for(int i = 0; i < neighbors.size(); i++){
 				int x = neighbors.get(i).x;
 				int y = neighbors.get(i).y;
 				
 				if(!visited[x][y]){
 					if(matrix[x][y] == 0){
-						int parentVal = matrix[head.x][head.y];
-						matrix[x][y] = parentVal == -2 ? 1 : parentVal + 1 ;
+						matrix[x][y] = away;
 					}
 					visited[x][y] = true;
+					queue.add(neighbors.get(i));
+				}else if(isGate && matrix[x][y] > 0){
+					matrix[x][y] = away;
+					queue.add(neighbors.get(i));
+				}else if(matrix[x][y] > away){
+					matrix[x][y] = away;
 					queue.add(neighbors.get(i));
 				}
 			}			
