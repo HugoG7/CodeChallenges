@@ -3,9 +3,9 @@ package com.hg.challenges.algorithms.searching;
 public class BinarySearch {
 
 	public static void main(String[] args) {
-		int[] arr = { 2, 3, 4, 10, 40 }; 
+		int[] arr = {-4, -1, 1, 1, 4, 5}; 
 		
-		int index = search(arr, 0, arr.length - 1, 1);
+		int index = search(arr, 0, arr.length - 1, 4);
 		System.out.println("Index Found in => " + index);
 	}
 	
